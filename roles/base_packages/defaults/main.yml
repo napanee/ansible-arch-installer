@@ -1,0 +1,10 @@
+base_packages_list:
+  - base
+  - base-devel
+  - linux
+  - linux-firmware
+  - lvm2
+  - networkmanager
+  - reflector
+  - openssh
+  - vim

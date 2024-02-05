@@ -1,0 +1,111 @@
+- name: Repartition install drive
+  block:
+    - name: Wipe install drive and all its partitions
+      command: find /dev -wholename "{{ install_drive }}*" -exec wipefs --force --all {} \;
+      tags:
+        - wipefs
+    - name: Create boot partition
+      parted:
+        device: "{{ install_drive }}"
+        flags: [boot, esp]
+        label: gpt
+        name: boot
+        number: 1
+        part_end: 512MB
+        state: present
+    - name: Create root partition
+      parted:
+        device: "{{ install_drive }}"
+        flags: [lvm]
+        label: gpt
+        name: lvm
+        number: 2
+        part_start: 512MB
+        state: present
+  tags:
+    - repartition
+- name: Encrypt LVM partition
+  block:
+    - name: Ask for LUKS encryption password
+      pause:
+        prompt: "Enter LUKS encryption password: "
+        echo: no
+      register: luks_password
+    - name: Destroy existing LUKS volume
+      luks_device:
+        device: "{{ cryptdevice }}"
+        state: absent
+    - name: Create and open LUKS volume
+      luks_device:
+        cipher: "aes-xts-plain"
+        device: "{{ cryptdevice }}"
+        name: "{{ luksdevice_name }}"
+        passphrase: "{{ luks_password.user_input }}"
+        sector_size: 512
+        state: "opened"
+  tags:
+    - encryption
+- name: Setup LVM root and swap volumes
+  block:
+    - name: Remove existing volume group
+      lvg:
+        vg: "{{ volumegroupname }}"
+        force: yes
+        state: absent
+    - name: Configure volume group
+      lvg:
+        vg: "{{ volumegroupname }}"
+        pvs:
+          - "/dev/mapper/{{ luksdevice_name }}"
+    - name: Configure logical volumes
+      lvol:
+        vg: "{{ volumegroupname }}"
+        lv: "{{ item.lv }}"
+        size: "{{ item.size }}"
+      loop:
+        - {lv: "{{ logicalvolumename_swap }}", size: 4G}
+        - {lv: "{{ logicalvolumename_root }}", size: "100%FREE"}
+  tags:
+    - lvm
+- name: Create filesystems
+  block:
+    - name: Create FAT32 filesystem in boot partition
+      filesystem:
+        dev: "{{ bootdevice }}"
+        fstype: vfat
+        opts: -F32
+        force: yes
+    - name: Create ext4 filesystem in root volume
+      filesystem:
+        dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }}
+        fstype: ext4
+        force: yes
+    - name: Create swap volume
+      filesystem:
+        dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}
+        fstype: swap
+        force: yes
+  tags:
+    - create_filesystems
+- name: Mount filesystems
+  block:
+    - name: Mount root filesystem
+      mount:
+        path: "{{ mount_path }}"
+        src: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }}
+        fstype: ext4
+        state: mounted
+    - name: Create mountpoint for boot volume
+      file:
+        path: "{{ mount_path }}/boot"
+        state: directory
+    - name: Mount boot filesystem
+      mount:
+        path: "{{ mount_path }}/boot"
+        src: "{{ bootdevice }}"
+        fstype: vfat
+        state: mounted
+    - name: Mount swap partition
+      command: "swapon /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}"
+  tags:
+    - mount_filesystems

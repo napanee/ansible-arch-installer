@@ -1,0 +1,21 @@
+- name: Create boot entry
+  command: arch-chroot {{ mount_path }} bootctl --path=/boot install
+
+- name: Create the bootloader loader config
+  copy:
+    src: loader.conf
+    dest: "{{ mount_path }}/boot/loader/loader.conf"
+
+- name: Discover the luks partition's UUID
+  command: blkid --match-tag=UUID --output=value {{ cryptdevice }}
+  register: luks_device_uuid
+
+- name: Configure the arch bootloader entry
+  template:
+    src: arch.conf.j2
+    dest: "{{ mount_path }}/boot/loader/entries/arch.conf"
+
+- name: Configure the arch bootloader fallback entry
+  template:
+    src: arch-fallback.conf.j2
+    dest: "{{ mount_path }}/boot/loader/entries/arch-fallback.conf"

@@ -1,0 +1,35 @@
+---
+- name: Check, if we are in the Arch installer
+  hosts: vmArchInstaller
+  tasks:
+    - name: Abort if the host is not booted from the Arch install media
+      fail:
+        msg: "This host is not booted from the Arch install media!"
+      when: ansible_nodename != 'archiso'
+      tags:
+        - quick_exit
+
+- name: Install the base system
+  hosts: vmArchInstaller
+  tasks:
+    - import_role:
+        name: disksetup
+    - import_role:
+        name: base_packages
+  post_tasks:
+    - import_role:
+        name: postinstall
+    - import_role:
+        name: bootloader
+
+- name: Configure the installed system
+  hosts: vmArchInstaller
+  tags: mainconfig
+  roles:
+    - role: hostname
+    - role: locales
+    - role: user
+  post_tasks:
+    - import_role:
+        name: postconfig
+    - reboot:

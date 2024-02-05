@@ -1,0 +1,18 @@
+- name: Ask for hostname
+  pause:
+    prompt: "Enter hostname: "
+  register: hostname
+
+- name: Set hostname in /etc/hostname
+  copy:
+    content: "{{ hostname.user_input }}\n"
+    dest: "{{ mount_path }}/etc/hostname"
+
+- name: Set hostnames in /etc/hosts
+  lineinfile:
+    path: "{{ mount_path }}/etc/hosts"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - { line: "127.0.0.1\tlocalhost\t{{ hostname.user_input }}" }
+    - { line: "::1\t\tlocalhost\t{{ hostname.user_input }}" }
