@@ -11,11 +11,16 @@
     echo: yes
   register: username
 
+- name: Check that the user is present
+  shell: cat {{ mount_path }}/etc/passwd | grep {{ username.user_input }}
+  register: user_exists
+
 - name: Ask for password
   pause:
     prompt: "Enter password: "
     echo: no
   register: password
+  when: user_exists.stdout_lines | length == 0
 
 - name: Create user account
   block:
@@ -24,3 +29,4 @@
   - name: Set the user account password
     command: arch-chroot {{ mount_path }} usermod --password "{{ password.user_input | password_hash('sha512') }}" "{{ username.user_input }}"
   tags: add_user
+  when: user_exists.stdout_lines | length == 0

@@ -32,4 +32,3 @@
   post_tasks:
     - import_role:
         name: postconfig
-    - reboot:

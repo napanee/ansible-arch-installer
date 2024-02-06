@@ -3,3 +3,4 @@
   loop:
     - NetworkManager
     - reflector.timer
+    - sshd

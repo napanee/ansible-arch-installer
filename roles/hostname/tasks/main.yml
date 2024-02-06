@@ -12,7 +12,8 @@
   lineinfile:
     path: "{{ mount_path }}/etc/hosts"
     line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
     state: present
   loop:
-    - { line: "127.0.0.1\tlocalhost\t{{ hostname.user_input }}" }
-    - { line: "::1\t\tlocalhost\t{{ hostname.user_input }}" }
+    - { line: "127.0.0.1\tlocalhost\t{{ hostname.user_input }}", regexp: '^[\.0127]*\tlocalhost\t.*$' }
+    - { line: "::1\t\tlocalhost\t{{ hostname.user_input }}", regexp: '^::1\t\tlocalhost\t.*$' }

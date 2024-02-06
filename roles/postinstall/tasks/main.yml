@@ -1,12 +1,22 @@
 - name: Generate fstab
   shell: genfstab -U {{ mount_path }} > "{{ mount_path }}/etc/fstab"
 
+- name: Make sure custom hooks are in config
+  lineinfile:
+    path: "{{ mount_path }}/etc/mkinitcpio.conf"
+    regexp: "^(HOOKS=.*){{ hooks | join(' ') }} (filesystems.*)$"
+    state: absent
+  check_mode: true
+  register: hooks_in_line
+
 - name: Add additional hooks to mkinitcpio config
   lineinfile:
+    path: "{{ mount_path }}/etc/mkinitcpio.conf"
     backrefs: yes
     regexp: ^(HOOKS=.*)(filesystems.*)$
     line: \1{{ hooks | join(' ') }} \2
-    path: "{{ mount_path }}/etc/mkinitcpio.conf"
+  when: hooks_in_line.changed|bool == false
 
 - name: Regenerate initramfs
   command: arch-chroot {{ mount_path }} mkinitcpio -P
+  

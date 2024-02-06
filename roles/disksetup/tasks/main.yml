@@ -1,9 +1,5 @@
 - name: Repartition install drive
   block:
-    - name: Wipe install drive and all its partitions
-      command: find /dev -wholename "{{ install_drive }}*" -exec wipefs --force --all {} \;
-      tags:
-        - wipefs
     - name: Create boot partition
       parted:
         device: "{{ install_drive }}"
@@ -23,7 +19,7 @@
         part_start: 512MB
         state: present
   tags:
-    - repartition
+    - partition
 - name: Encrypt LVM partition
   block:
     - name: Ask for LUKS encryption password
@@ -31,10 +27,6 @@
         prompt: "Enter LUKS encryption password: "
         echo: no
       register: luks_password
-    - name: Destroy existing LUKS volume
-      luks_device:
-        device: "{{ cryptdevice }}"
-        state: absent
     - name: Create and open LUKS volume
       luks_device:
         cipher: "aes-xts-plain"
@@ -47,11 +39,6 @@
     - encryption
 - name: Setup LVM root and swap volumes
   block:
-    - name: Remove existing volume group
-      lvg:
-        vg: "{{ volumegroupname }}"
-        force: yes
-        state: absent
     - name: Configure volume group
       lvg:
         vg: "{{ volumegroupname }}"
@@ -62,6 +49,7 @@
         vg: "{{ volumegroupname }}"
         lv: "{{ item.lv }}"
         size: "{{ item.size }}"
+        shrink: false
       loop:
         - {lv: "{{ logicalvolumename_swap }}", size: 4G}
         - {lv: "{{ logicalvolumename_root }}", size: "100%FREE"}
@@ -74,17 +62,14 @@
         dev: "{{ bootdevice }}"
         fstype: vfat
         opts: -F32
-        force: yes
     - name: Create ext4 filesystem in root volume
       filesystem:
         dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }}
         fstype: ext4
-        force: yes
     - name: Create swap volume
       filesystem:
         dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}
         fstype: swap
-        force: yes
   tags:
     - create_filesystems
 - name: Mount filesystems
@@ -105,7 +90,12 @@
         src: "{{ bootdevice }}"
         fstype: vfat
         state: mounted
+    - name: Check, if swap partiton is already mounted
+      command: swapon --show
+      changed_when: true
+      register: swap_check
     - name: Mount swap partition
       command: "swapon /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}"
+      when: swap_check.stdout_lines | length == 0
   tags:
     - mount_filesystems

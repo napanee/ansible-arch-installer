@@ -1,4 +1,4 @@
-title    Arch Linux
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
-options  cryptdevice=UUID={{ luks_device_uuid.stdout }}:{{ volumegroupname }} root=/dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }} rw lang=de init=/usr/lib/systemd/systemd locale=de_DE.UTF-8
+title		Arch Linux
+linux		/vmlinuz-linux
+initrd		/initramfs-linux.img
+options		cryptdevice=UUID={{ luks_device_uuid.stdout }}:{{ volumegroupname }} root=/dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }} rw lang=de init=/usr/lib/systemd/systemd locale=de_DE.UTF-8
