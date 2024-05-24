@@ -1,0 +1,8 @@
+- import_role:
+    name: installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: zsh
+- name: Set zsh as default shell
+  shell: chsh -s $(which zsh) martin
+  become: true

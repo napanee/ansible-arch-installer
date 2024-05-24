@@ -1,4 +1,4 @@
-base_packages_list:
+base_packages:
   - base
   - base-devel
   - linux
@@ -7,4 +7,3 @@ base_packages_list:
   - networkmanager
   - reflector
   - openssh
-  - vim

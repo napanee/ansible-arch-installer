@@ -1,9 +1,0 @@
----
-
-# The boot partition will be this large, in bytes (plus any alignment
-# constraint)
-partitioning_priv_boot_size: "{{ 512 * 1024 * 1024 }}"
-
-# Names for the VG and LV
-partitioning_priv_vg_name: "arch"
-partitioning_priv_lv_name: "root"

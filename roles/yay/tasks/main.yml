@@ -1,0 +1,24 @@
+- name: Check yay
+  become: true
+  become_user: "{{ passwordless_sudo_user_name }}"
+  block:
+    - name: Is YAY installed?
+      command: which yay
+      register: which_command
+      failed_when: which_command.rc >= 1
+  rescue:
+    - name: Remove temporary directory for yay
+      file:
+        path: "{{ temp_dir }}"
+        state: absent
+    - name: Clone yay repo
+      git:
+        repo: https://aur.archlinux.org/yay.git
+        dest: "{{ temp_dir }}"
+    - name: Run makepkg
+      shell: "cd {{ temp_dir | quote }} && makepkg -rsi --noconfirm"
+  always:
+    - name: Remove temporary directory
+      file:
+        state: absent
+        path: "{{ temp_dir }}"

@@ -1,0 +1,13 @@
+- name: Install dotfiles
+  block:
+    - name: Clone dotfiles-repo
+      git:
+        repo: https://oauth2:{{ github_token }}@github.com/Napanee/dotfiles.git
+        dest: ~/.dotfiles
+        recursive: true
+    - name: Install dotfiles
+      shell: |
+        cd ~/.dotfiles
+        ~/.dotfiles/dotbot/bin/dotbot -d ~/.dotfiles -c install.config.yml
+  become: true
+  become_user: "martin"

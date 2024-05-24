@@ -1,0 +1,12 @@
+- include_role:
+    name: "apps/base"
+- include_role:
+    name: "apps/bluetooth"
+- include_role:
+    name: "apps/docker"
+- include_role:
+    name: "apps/qtile"
+- include_role:
+    name: "apps/vim"
+- include_role:
+    name: "apps/zsh"

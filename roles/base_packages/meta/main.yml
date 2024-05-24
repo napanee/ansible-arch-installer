@@ -1,5 +1,0 @@
-dependencies:
-  - role: pacstrap
-    vars:
-      packages: "{{ base_packages_list }}"
-      chroot: "{{ mount_path }}"

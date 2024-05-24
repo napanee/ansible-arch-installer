@@ -1,0 +1,20 @@
+- name: Enable autostart
+  command: arch-chroot {{ mount_path | quote }} systemctl enable {{ item | quote }}
+  loop:
+    - NetworkManager
+    - reflector.timer
+    - sshd
+
+- name: Create root's .ssh
+  file:
+    path: "{{ mount_path }}/root/.ssh/"
+    state: directory
+
+- name: Test
+  local_action: command ssh-add -L
+  register: _ssh_public_key
+
+- name: Print public ssh key to file
+  copy:
+    content: "{{ _ssh_public_key.stdout }}"
+    dest: "{{ mount_path | quote}}/root/.ssh/authorized_keys"

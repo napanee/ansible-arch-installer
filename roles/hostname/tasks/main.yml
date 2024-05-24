@@ -1,19 +1,14 @@
-- name: Ask for hostname
-  pause:
-    prompt: "Enter hostname: "
-  register: hostname
-
 - name: Set hostname in /etc/hostname
   copy:
-    content: "{{ hostname.user_input }}\n"
-    dest: "{{ mount_path }}/etc/hostname"
+    content: "{{ hostname_hostname }}\n"
+    dest: /etc/hostname
 
 - name: Set hostnames in /etc/hosts
   lineinfile:
-    path: "{{ mount_path }}/etc/hosts"
+    path: /etc/hosts
     line: "{{ item.line }}"
     regexp: "{{ item.regexp }}"
     state: present
   loop:
-    - { line: "127.0.0.1\tlocalhost\t{{ hostname.user_input }}", regexp: '^[\.0127]*\tlocalhost\t.*$' }
-    - { line: "::1\t\tlocalhost\t{{ hostname.user_input }}", regexp: '^::1\t\tlocalhost\t.*$' }
+    - { line: "127.0.0.1\tlocalhost\t{{ hostname_hostname }}", regexp: '^[\.0127]*\tlocalhost\t.*$' }
+    - { line: "::1\t\tlocalhost\t{{ hostname_hostname }}", regexp: '^::1\t\tlocalhost\t.*$' }

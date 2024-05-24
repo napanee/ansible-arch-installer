@@ -1,0 +1,4 @@
+packages_list:
+  - bluez
+  - blueman
+  - bluez-hid2hci

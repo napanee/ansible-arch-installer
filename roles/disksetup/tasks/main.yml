@@ -1,101 +1,11 @@
-- name: Repartition install drive
-  block:
-    - name: Create boot partition
-      parted:
-        device: "{{ install_drive }}"
-        flags: [boot, esp]
-        label: gpt
-        name: boot
-        number: 1
-        part_end: 512MB
-        state: present
-    - name: Create root partition
-      parted:
-        device: "{{ install_drive }}"
-        flags: [lvm]
-        label: gpt
-        name: lvm
-        number: 2
-        part_start: 512MB
-        state: present
-  tags:
-    - partition
-- name: Encrypt LVM partition
-  block:
-    - name: Ask for LUKS encryption password
-      pause:
-        prompt: "Enter LUKS encryption password: "
-        echo: no
-      register: luks_password
-    - name: Create and open LUKS volume
-      luks_device:
-        cipher: "aes-xts-plain"
-        device: "{{ cryptdevice }}"
-        name: "{{ luksdevice_name }}"
-        passphrase: "{{ luks_password.user_input }}"
-        sector_size: 512
-        state: "opened"
-  tags:
-    - encryption
-- name: Setup LVM root and swap volumes
-  block:
-    - name: Configure volume group
-      lvg:
-        vg: "{{ volumegroupname }}"
-        pvs:
-          - "/dev/mapper/{{ luksdevice_name }}"
-    - name: Configure logical volumes
-      lvol:
-        vg: "{{ volumegroupname }}"
-        lv: "{{ item.lv }}"
-        size: "{{ item.size }}"
-        shrink: false
-      loop:
-        - {lv: "{{ logicalvolumename_swap }}", size: 4G}
-        - {lv: "{{ logicalvolumename_root }}", size: "100%FREE"}
-  tags:
-    - lvm
-- name: Create filesystems
-  block:
-    - name: Create FAT32 filesystem in boot partition
-      filesystem:
-        dev: "{{ bootdevice }}"
-        fstype: vfat
-        opts: -F32
-    - name: Create ext4 filesystem in root volume
-      filesystem:
-        dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }}
-        fstype: ext4
-    - name: Create swap volume
-      filesystem:
-        dev: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}
-        fstype: swap
-  tags:
-    - create_filesystems
-- name: Mount filesystems
-  block:
-    - name: Mount root filesystem
-      mount:
-        path: "{{ mount_path }}"
-        src: /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }}
-        fstype: ext4
-        state: mounted
-    - name: Create mountpoint for boot volume
-      file:
-        path: "{{ mount_path }}/boot"
-        state: directory
-    - name: Mount boot filesystem
-      mount:
-        path: "{{ mount_path }}/boot"
-        src: "{{ bootdevice }}"
-        fstype: vfat
-        state: mounted
-    - name: Check, if swap partiton is already mounted
-      command: swapon --show
-      changed_when: true
-      register: swap_check
-    - name: Mount swap partition
-      command: "swapon /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}"
-      when: swap_check.stdout_lines | length == 0
-  tags:
-    - mount_filesystems
+- include_role:
+    name: "disksetup/partitioning"
+    public: yes
+- import_role:
+    name: base_packages
+- include_role:
+    name: "disksetup/postpartitioning"
+    public: yes
+- include_role:
+    name: "disksetup/bootloader"
+    public: yes

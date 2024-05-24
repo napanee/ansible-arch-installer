@@ -1,0 +1,44 @@
+packages_list:
+  - dunst
+  - fzf
+  - gnu-free-fonts
+  - nvm
+  - noto-fonts-emoji
+  - pipewire
+  - pipewire-alsa
+  - pipewire-pulse
+  - pipewire-jack
+  - pipewire-audio
+  - rofi
+  - rofi-calc
+  - rofi-emoji
+  - terminator
+  - ttf-sourcecodepro-nerd
+  - arandr                        # Provide a simple visual front end for XRandR 1.2.
+  - betterlockscreen              # fast and sweet looking lockscreen for linux systems
+  - btop                          # A monitor of system resources
+  - firefox                       # Browser
+  - gnome-screenshot              # Screenshot tool
+  - lf                            # Terminal file manage
+  - mpv                           # Media Player
+  - ncdu                          # Disk usage analyzer with an ncurses interface
+  - ntfs-3g                       # NTFS filesystem driver and utilities
+  - numlockx                      # Turns on the numlock key in X11.
+  - openssh                       # SSH protocol implementation for remote login, command execution and file transfer
+  - picom                         # X compositor that may fix tearing issues
+  - postgresql-libs               # Libraries for use with PostgreSQL
+  - smbclient                     # Tools to access a server's filespace and printers via SMB
+  - tig                           # Text-mode interface for Git.
+  - unzip                         # For extracting and viewing files in .zip archives
+  - xidlehook                     # An automatic X screen-locker/screen-saver
+  - xorg-xmodmap                  # Utility for modifying keymaps and button mappings
+  - xorg-server-xephyr            # Nested X server that runs as an X application
+  - xorg-xbacklight               # RandR-based backlight control application
+  - enpass-bin                    # Password Manager
+  # - joplin-desktop                # Notes Application
+  - nextcloud-client              # Nextcloud desktop client
+  - signal-desktop                # Private messaging from your desktop
+  - simplescreenrecorder          # A feature-rich screen recorder that supports X11 and OpenGL.
+  # - thunderbird                   # Mail Client
+  # - vscodium                      # Visual Studio Code without telemetry
+  # - visual-studio-code-bin        # Code Editor

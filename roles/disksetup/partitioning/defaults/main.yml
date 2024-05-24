@@ -1,0 +1,10 @@
+install_drive: /dev/sda
+luksdevice_name: luks_lvm
+boot_partition_suffix: 1
+crypt_partition_suffix: 2
+bootdevice: "{{ install_drive }}{{ boot_partition_suffix }}"
+cryptdevice: "{{ install_drive }}{{ crypt_partition_suffix }}"
+volumegroupname: "arch"
+logicalvolumename_root: "root"
+logicalvolumename_swap: "swap"
+mount_path: "/mnt"

@@ -1,0 +1,4 @@
+- name: Copy X11 config files
+  copy:
+    src: 30-touchpad.conf
+    dest: /etc/X11/xorg.conf.d/

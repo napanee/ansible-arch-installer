@@ -1,6 +1,0 @@
-- name: Enable autostart
-  command: arch-chroot {{ mount_path | quote }} systemctl enable {{ item | quote }}
-  loop:
-    - NetworkManager
-    - reflector.timer
-    - sshd

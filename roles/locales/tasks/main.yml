@@ -3,28 +3,18 @@
     name: "{{ locale_timezone }}"
     hwclock: UTC
 
-- name: Generate locale
-  locale_gen:
-    name: "{{ locale_locale }}"
-
 - name: Set locale
   shell: set -o pipefail || exit 1;
     { localectl status &&
-      localectl set-locale {{ locale_locale | quote }} &&
+      localectl set-locale {{ locale_system_lng | quote }} &&
       localectl status
     ;} | sort | uniq -u
   register: _locale_changed
   changed_when: _locale_changed.stdout != ""
 
-- name: Copy locale.conf
-  copy:
-    src: /etc/locale.conf
-    dest: /mnt/etc/locale.conf
-
-- name: Copy locale.gen
-  copy:
-    src: /etc/locale.gen
-    dest: /mnt/etc/locale.gen
+- name: Generate locale
+  locale_gen:
+    name: "{{ locale_locale }}"
 
 - name: Set keymap
   shell: set -o pipefail || exit 1;
@@ -35,7 +25,11 @@
   register: _keymap_changed
   changed_when: _keymap_changed.stdout != ""
 
-- name: Copy vconsole.conf
-  copy:
-    src: /etc/vconsole.conf
-    dest: /mnt/etc/vconsole.conf
+- name: Set X11 Keymap
+  shell: set -o pipefail || exit 1;
+    { localectl status &&
+      localectl set-x11-keymap {{ locale_keymap | quote }} pc105 deadgraveacute &&
+      localectl status
+    ;} | sort | uniq -u
+  register: _locale_x11_keymap_changed
+  changed_when: _locale_x11_keymap_changed.stdout != ""

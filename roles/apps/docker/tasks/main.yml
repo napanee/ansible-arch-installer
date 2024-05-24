@@ -1,0 +1,8 @@
+- import_role:
+    name: installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: docker
+- name: Enable docker service
+  shell: systemctl enable --now docker
+  become: true

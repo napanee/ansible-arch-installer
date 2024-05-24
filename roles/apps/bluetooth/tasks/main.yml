@@ -1,0 +1,8 @@
+- import_role:
+    name: installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: bluetooth
+- name: Enable bluetooth service
+  shell: systemctl enable --now bluetooth
+  become: true
