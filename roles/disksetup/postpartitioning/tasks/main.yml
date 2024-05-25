@@ -13,8 +13,8 @@
   lineinfile:
     path: "{{ mount_path }}/etc/mkinitcpio.conf"
     backrefs: yes
-    regexp: ^(HOOKS=.*)(filesystems.*)$
-    line: \1{{ hooks | join(' ') }} \2
+    regexp: ^(HOOKS=.*) (filesystems) (.*)$
+    line: \1 {{ hooks | join(' ') }} \2 \3
   when: hooks_in_line.changed|bool == false
 
 - name: Regenerate initramfs

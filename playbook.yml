@@ -29,5 +29,6 @@
     - apps
     - x11
   post_tasks:
-    - reboot:
+    - name: Reboot into the system
       tags: reboot
+      reboot:

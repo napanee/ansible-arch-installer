@@ -28,7 +28,7 @@
 - name: Set X11 Keymap
   shell: set -o pipefail || exit 1;
     { localectl status &&
-      localectl set-x11-keymap {{ locale_keymap | quote }} pc105 deadgraveacute &&
+      localectl set-x11-keymap {{ locale_x11_keymap | quote }} pc105 deadgraveacute &&
       localectl status
     ;} | sort | uniq -u
   register: _locale_x11_keymap_changed
