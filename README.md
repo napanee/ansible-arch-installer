@@ -6,7 +6,8 @@ An ansible playbook to help install Arch Linux.
 
 1. Pull this repo
 2. Add HOST-IP to `inventory/hosts`
-3. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+3. Edit primary disk name in `roles/disksetup/partitioning/defaults/main.yml`
+4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
 ```
 github_token=""
 luks_pass=""
