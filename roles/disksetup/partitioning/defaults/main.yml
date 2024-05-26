@@ -1,7 +1,7 @@
-install_drive: /dev/sda
+install_drive: /dev/nvme0n1
 luksdevice_name: luks_lvm
-boot_partition_suffix: 1
-crypt_partition_suffix: 2
+boot_partition_suffix: "p1"
+crypt_partition_suffix: "p2"
 bootdevice: "{{ install_drive }}{{ boot_partition_suffix }}"
 cryptdevice: "{{ install_drive }}{{ crypt_partition_suffix }}"
 volumegroupname: "arch"
