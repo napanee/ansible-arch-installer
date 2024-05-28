@@ -1,6 +1,7 @@
 ---
 - name: Install arch
-  hosts: all
+  hosts:
+    - vm
   tags:
     - bootstrap
   pre_tasks:
@@ -16,7 +17,8 @@
      reboot:
 
 - name: Dotfiles install
-  hosts: all
+  hosts:
+    - vm
   tags:
     - mainsetup
   pre_tasks:

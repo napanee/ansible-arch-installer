@@ -1,0 +1,8 @@
+---
+- name: Test
+  hosts: local
+  connection: local
+  tags:
+    - bootstrap
+  roles:
+    - "apps/codium"
