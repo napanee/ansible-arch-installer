@@ -17,5 +17,10 @@
     line: \1 {{ hooks | join(' ') }} \2 \3
   when: hooks_in_line.changed|bool == false
 
+- name: Set language
+  template:
+    src: vconsole.conf.j2
+    dest: "{{ mount_path }}/etc/vconsole.conf"
+
 - name: Regenerate initramfs
   command: arch-chroot {{ mount_path }} mkinitcpio -P

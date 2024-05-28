@@ -8,7 +8,10 @@ An ansible playbook to help install Arch Linux.
 2. Add HOST-IP to `inventory/hosts`
 3. Edit primary disk name in `roles/disksetup/partitioning/defaults/main.yml`
 4. Edit hostname in `roles/hostname/defaults/main.yml`
-5. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+5. **[OPTIONAL]** Edit languages in: (default: german keyboard, english system)
+    - roles/disksetup/postpartitioning/defaults/main.yml
+    - roles/locales/defaults/main.yml
+6. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
 ```
 github_token=""
 luks_pass=""
@@ -35,3 +38,9 @@ After boot into installed system, connect to wifi:
 1. `nmcli dev status`
 2. `nmcli dev wifi list`
 3. `sudo nmcli dev wifi connect <SSID> --ask`
+
+and run:
+
+```console
+ansible-playbook playbook.yml --ask-vault-password -t mainsetup
+```
