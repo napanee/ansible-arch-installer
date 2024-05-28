@@ -41,4 +41,5 @@ packages_list:
   - simplescreenrecorder          # A feature-rich screen recorder that supports X11 and OpenGL.
   # - thunderbird                   # Mail Client
   # - vscodium                      # Visual Studio Code without telemetry
-  # - visual-studio-code-bin        # Code Editor
+  - visual-studio-code-bin        # Code Editor
+  - wireguard-tools               # VPN tool
