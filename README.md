@@ -31,7 +31,7 @@ Then connect to wlan:
 Now you are able to login remotely as root, so you can populate `hosts.yml` and run `playbook.yml`:
 
 ```console
-ansible-playbook playbook.yml --ask-vault-password
+ansible-playbook playbook.yml --ask-vault-password -t bootstrap
 ```
 
 After boot into installed system, connect to wifi:
