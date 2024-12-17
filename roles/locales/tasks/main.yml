@@ -1,7 +1,6 @@
 - name: Set timezone
   timezone:
     name: "{{ locale_timezone }}"
-    hwclock: UTC
 
 - name: Set locale
   shell: set -o pipefail || exit 1;
