@@ -13,14 +13,15 @@ An ansible playbook to help install Arch Linux.
     - roles/locales/defaults/main.yml
 6. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
 ```
-github_token=""
-luks_pass=""
-user_pass=""
+github_token: ""
+luks_pass: ""
+user_pass: ""
 ```
 
 ## Usage ##
 
-After booting from the Arch installation media, you will need to set the root password using the `passwd` command.
+After booting from the Arch installation media, you will need to set the root password to `root` using the `passwd` command.
+<br /><br />
 Then connect to wlan:
 1. `iwctl`
 2. `device list`
