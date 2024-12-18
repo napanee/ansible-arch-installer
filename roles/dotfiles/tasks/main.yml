@@ -2,7 +2,7 @@
   block:
     - name: Clone dotfiles-repo
       git:
-        repo: https://oauth2:{{ github_token }}@github.com/Napanee/dotfiles.git
+        repo: https://github.com/napanee/dotfiles.git
         dest: ~/.dotfiles
         recursive: true
     - name: Install dotfiles
