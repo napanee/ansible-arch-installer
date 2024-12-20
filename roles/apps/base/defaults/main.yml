@@ -4,11 +4,11 @@ packages_list:
   - gnu-free-fonts
   - nvm
   - noto-fonts-emoji
-  - pipewire
-  - pipewire-alsa
-  - pipewire-pulse
-  - pipewire-jack
-  - pipewire-audio
+  # - pipewire
+  # - pipewire-alsa
+  # - pipewire-pulse
+  # - pipewire-jack
+  # - pipewire-audio
   - rofi
   - rofi-calc
   - rofi-emoji
@@ -17,7 +17,7 @@ packages_list:
   - arandr                        # Provide a simple visual front end for XRandR 1.2.
   - betterlockscreen              # fast and sweet looking lockscreen for linux systems
   - btop                          # A monitor of system resources
-  - firefox                       # Browser
+  # - firefox                       # Browser
   - gnome-screenshot              # Screenshot tool
   - lf                            # Terminal file manage
   - mpv                           # Media Player
@@ -36,8 +36,8 @@ packages_list:
   - xorg-xbacklight               # RandR-based backlight control application
   - enpass-bin                    # Password Manager
   # - joplin-desktop                # Notes Application
-  - nextcloud-client              # Nextcloud desktop client
-  - signal-desktop                # Private messaging from your desktop
+  # - nextcloud-client              # Nextcloud desktop client
+  # - signal-desktop                # Private messaging from your desktop
   - simplescreenrecorder          # A feature-rich screen recorder that supports X11 and OpenGL.
   # - thunderbird                   # Mail Client
   # - vscodium                      # Visual Studio Code without telemetry

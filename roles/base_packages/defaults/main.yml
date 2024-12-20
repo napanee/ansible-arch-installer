@@ -6,5 +6,4 @@ base_packages:
   - lvm2
   - networkmanager
   - python
-  - reflector
   - openssh
