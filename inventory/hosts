@@ -1,2 +1,0 @@
-vm ansible_host=
-local ansible_host=localhost
