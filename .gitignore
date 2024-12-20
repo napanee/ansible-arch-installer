@@ -1,3 +1,2 @@
-OLD
-
+inventory/hosts
 inventory/host_vars/vm.yml
