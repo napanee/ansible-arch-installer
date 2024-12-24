@@ -1,4 +1,3 @@
 hooks:
   - encrypt
   - lvm2
-locale_keymap: de-latin1

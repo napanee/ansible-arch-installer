@@ -1,0 +1,14 @@
+---
+hostname_hostname: archlinux
+
+locale_keymap: us
+locale_x11_keymap: us
+locale_timezone: Europe/Berlin
+locale_locale: en_US.UTF-8
+locale_system_lng: en_US.UTF-8
+
+# With an SSD it is typically /dev/nvme0n1 (boot-suffix: p1, crypt-suffix: p2).
+# For an HDD /dev/sda (boot-suffix: 1, crypt-suffix: 2)
+install_drive: /dev/sda
+boot_partition_suffix: "1"
+crypt_partition_suffix: "2"
