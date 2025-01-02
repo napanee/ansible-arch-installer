@@ -1,0 +1,5 @@
+- import_role:
+    name: installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: yazi

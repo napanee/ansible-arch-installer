@@ -10,3 +10,5 @@
     name: "apps/vim"
 - include_role:
     name: "apps/zsh"
+- include_role:
+    name: "apps/yazi"
