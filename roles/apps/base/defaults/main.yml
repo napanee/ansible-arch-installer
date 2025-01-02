@@ -12,14 +12,14 @@ packages_list:
   - rofi
   - rofi-calc
   - rofi-emoji
-  - terminator
+  - wezterm
+  - ttf-nerd-fonts-symbols-mono
   - ttf-sourcecodepro-nerd
   - arandr                        # Provide a simple visual front end for XRandR 1.2.
   - betterlockscreen              # fast and sweet looking lockscreen for linux systems
   - btop                          # A monitor of system resources
   # - firefox                       # Browser
   - gnome-screenshot              # Screenshot tool
-  - lf                            # Terminal file manage
   - mpv                           # Media Player
   - ncdu                          # Disk usage analyzer with an ncurses interface
   - ntfs-3g                       # NTFS filesystem driver and utilities
