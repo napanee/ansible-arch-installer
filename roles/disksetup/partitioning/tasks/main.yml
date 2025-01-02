@@ -7,7 +7,7 @@
         label: gpt
         name: boot
         number: 1
-        part_end: 512MB
+        part_end: 512MiB
         state: present
     - name: Create root partition
       parted:
@@ -16,7 +16,7 @@
         label: gpt
         name: lvm
         number: 2
-        part_start: 512MB
+        part_start: 512MiB
         state: present
   tags:
     - partition
