@@ -6,3 +6,7 @@
   pacman:
     name: git
     state: present
+- name: Copy backlight-udev rule
+  copy:
+    src: backlight.rules
+    dest: /etc/udev/rules.d/

@@ -4,6 +4,8 @@ packages_list:
   - gnu-free-fonts
   - nvm
   - noto-fonts-emoji
+  - pulseaudio
+  - pamixer
   # - pipewire
   # - pipewire-alsa
   # - pipewire-pulse
@@ -16,9 +18,10 @@ packages_list:
   - ttf-nerd-fonts-symbols-mono
   - ttf-sourcecodepro-nerd
   - arandr                        # Provide a simple visual front end for XRandR 1.2.
-  - betterlockscreen              # fast and sweet looking lockscreen for linux systems
   - btop                          # A monitor of system resources
   # - firefox                       # Browser
+  - google-chrome                 # Browser
+  - gnome-keyring
   - gnome-screenshot              # Screenshot tool
   - mpv                           # Media Player
   - ncdu                          # Disk usage analyzer with an ncurses interface
@@ -42,4 +45,5 @@ packages_list:
   # - thunderbird                   # Mail Client
   # - vscodium                      # Visual Studio Code without telemetry
   - visual-studio-code-bin        # Code Editor
+  - wget
   - wireguard-tools               # VPN tool

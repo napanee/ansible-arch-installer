@@ -10,4 +10,4 @@
         cd ~/.dotfiles
         ~/.dotfiles/dotbot/bin/dotbot -d ~/.dotfiles -c install.config.yml
   become: true
-  become_user: "martin"
+  become_user: "{{ username }}"

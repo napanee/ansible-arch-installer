@@ -4,5 +4,5 @@
     packages: "{{ packages_list }}"
     task_name: zsh
 - name: Set zsh as default shell
-  shell: chsh -s $(which zsh) martin
+  shell: chsh -s $(which zsh) {{ username }}
   become: true

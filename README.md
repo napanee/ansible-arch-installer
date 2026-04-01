@@ -28,9 +28,16 @@ Then connect to wlan:
 4. `station wlan0 get-networks`
 5. `station wlan0 connect <SSID>`
 
+<br />
+Optional delete disk:
+
+```bash
+dd if=/dev/urandom of=/dev/sdX bs=4096 iflag=fullblock status=progress
+```
+
 Now you are able to login remotely as root, so you can populate `hosts.yml` and run `playbook.yml`:
 
-```console
+```bash
 ansible-playbook playbook.yml --ask-vault-password -t bootstrap
 ```
 
@@ -41,6 +48,6 @@ After boot into installed system, connect to wifi:
 
 and run:
 
-```console
+```bash
 ansible-playbook playbook.yml --ask-vault-password -t mainsetup
 ```

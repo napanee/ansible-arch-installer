@@ -1,5 +1,6 @@
 packages_list:
   - python-iwlib
+  - python-psutil
   - qtile
   - xorg
   - xorg-xinit

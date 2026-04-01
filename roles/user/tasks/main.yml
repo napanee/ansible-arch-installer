@@ -12,7 +12,7 @@
 - name: Create user account
   block:
   - name: Create user account
-    command: arch-chroot {{ mount_path | quote }} useradd -m -g users -G wheel -s /bin/bash "{{ username }}"
+    command: arch-chroot {{ mount_path | quote }} useradd -m -g users -G wheel,video -s /bin/bash "{{ username }}"
   - name: Set the user account password
     command: arch-chroot {{ mount_path | quote }} usermod --password "{{ user_pass | password_hash('sha512') }}" "{{ username }}"
   tags: add_user
