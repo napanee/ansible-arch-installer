@@ -12,3 +12,5 @@
     name: "apps/zsh"
 - include_role:
     name: "apps/yazi"
+- include_role:
+    name: "apps/betterlockscreen"
