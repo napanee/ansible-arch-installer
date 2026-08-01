@@ -1,4 +1,6 @@
 packages_list:
   - bluez
+  - bluez-utils        # bluetoothctl (Standard-CLI)
   - blueman
-  - bluez-hid2hci
+  # - bluez-hid2hci    # only for old Logitech/Dell-HID-Dongles
+  # - bluez-obex       # only for filetransfer over bluetooth (needs obex.service)
