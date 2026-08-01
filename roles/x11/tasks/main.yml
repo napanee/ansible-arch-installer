@@ -1,4 +1,7 @@
 - name: Copy X11 config files
   copy:
-    src: 30-touchpad.conf
+    src: "{{ item }}"
     dest: /etc/X11/xorg.conf.d/
+  loop:
+    - 00-keyboard.conf
+    - 30-touchpad.conf
