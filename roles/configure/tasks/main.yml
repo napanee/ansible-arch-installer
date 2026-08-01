@@ -20,11 +20,14 @@
     path: "{{ mount_path }}/root/.ssh/"
     state: directory
 
-- name: Test
-  local_action: command ssh-add -L
+- name: Read local SSH public key
+  command: ssh-add -L
+  delegate_to: localhost
+  changed_when: false
   register: _ssh_public_key
 
 - name: Print public ssh key to file
+  # ssh-add -L can output multiple keys; only transfer the ssh-rsa key.
   copy:
-    content: "{{ _ssh_public_key.stdout }}"
+    content: "{{ _ssh_public_key.stdout_lines | select('match', 'ssh-rsa ') | join('\n') }}\n"
     dest: "{{ mount_path | quote}}/root/.ssh/authorized_keys"
