@@ -1,22 +1,28 @@
-- name: Check yay
+- name: Install yay (AUR helper)
   become: true
   become_user: "{{ passwordless_sudo_user_name }}"
   block:
-    - name: Is YAY installed?
+    - name: Check whether yay is installed
       command: which yay
       register: which_command
-      failed_when: which_command.rc >= 1
-  rescue:
-    - name: Remove temporary directory for yay
+      changed_when: false
+      failed_when: false
+
+    - name: Remove any stale yay build directory
       file:
         path: "{{ temp_dir }}"
         state: absent
+      when: which_command.rc != 0
+
     - name: Clone yay repo
       git:
         repo: https://aur.archlinux.org/yay.git
         dest: "{{ temp_dir }}"
-    - name: Run makepkg
+      when: which_command.rc != 0
+
+    - name: Build and install yay
       shell: "cd {{ temp_dir | quote }} && makepkg -rsi --noconfirm"
+      when: which_command.rc != 0
   always:
     - name: Remove temporary directory
       file:
