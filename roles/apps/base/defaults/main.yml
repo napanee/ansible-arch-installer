@@ -4,6 +4,7 @@ packages_list:
   - gnu-free-fonts
   - nvm
   - noto-fonts-emoji
+  - noto-fonts                    # Broad font coverage for web pages
   - pass
   - rofi
   - rofi-calc
@@ -16,10 +17,20 @@ packages_list:
   - firefox                       # Browser
   - google-chrome                 # Browser
   - gnome-keyring
-  - gnome-screenshot              # Screenshot tool
+  - libsecret                     # Secret Service client library (replaces deprecated libgnome-keyring)
+  - maim                          # Command-line screenshot utility
+  - slop                          # Region/area selection (used by maim)
+  - xclip                         # Clipboard access from the command line
   - mpv                           # Media Player
   - ncdu                          # Disk usage analyzer with an ncurses interface
   - ntfs-3g                       # NTFS filesystem driver and utilities
+  - gvfs                          # Virtual filesystem: mounts, trash, recent (needed by GTK file dialogs)
+  - udisks2                       # Automount of removable drives
+  - xdg-desktop-portal            # Portal service used by browser/app file pickers
+  - xdg-desktop-portal-gtk        # GTK backend for the desktop portal
+  - xdg-utils                     # xdg-open / xdg-mime: default-application handling
+  - shared-mime-info              # MIME type database
+  - desktop-file-utils            # Desktop entry database
   - numlockx                      # Turns on the numlock key in X11.
   - openssh                       # SSH protocol implementation for remote login, command execution and file transfer
   - picom                         # X compositor that may fix tearing issues
@@ -30,7 +41,7 @@ packages_list:
   - xidlehook                     # An automatic X screen-locker/screen-saver
   - xorg-xmodmap                  # Utility for modifying keymaps and button mappings
   - xorg-server-xephyr            # Nested X server that runs as an X application
-  - xorg-xbacklight               # RandR-based backlight control application
+  - brightnessctl                 # Backlight and LED brightness control
   # - enpass-bin                    # Password Manager
   # - joplin-desktop                # Notes Application
   # - nextcloud-client              # Nextcloud desktop client
