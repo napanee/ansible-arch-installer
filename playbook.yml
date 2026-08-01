@@ -32,7 +32,6 @@
     - dotfiles
     - apps
     - x11
-    - autostart_x
   post_tasks:
     - name: Reboot into the system
       tags: reboot
