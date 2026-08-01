@@ -12,7 +12,10 @@ An ansible playbook to help install Arch Linux.
 vm ansible_host=[IP]
 ```
 
-Replace `[IP]` with the IP address of the target machine. Without this file Ansible cannot parse the `inventory/` directory (which only contains `group_vars`/`host_vars`) and aborts with warnings like `Unable to parse ... inventory as an inventory source` and `Could not match supplied host pattern, ignoring: vm`. 3. Edit values in `inventory/group_vars/arch.yml` 4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+Replace `[IP]` with the IP address of the target machine.
+
+3. Edit values in `inventory/group_vars/arch.yml`
+4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
 
 ```
 luks_pass: ""
