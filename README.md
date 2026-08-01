@@ -2,26 +2,29 @@
 
 An ansible playbook to help install Arch Linux.
 
-## Setup ##
+## Setup
 
 1. Pull this repo
-2. Create `inventory/hosts`-File with the HOST-IP
+2. Create the `inventory/hosts`-File with the HOST-IP (this file is required and gitignored, so it does not exist after cloning):
+
 ```
 [arch]
 vm ansible_host=[IP]
 ```
-3. Edit values in `inventory/group_vars/arch.yml`
-4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+
+Replace `[IP]` with the IP address of the target machine. Without this file Ansible cannot parse the `inventory/` directory (which only contains `group_vars`/`host_vars`) and aborts with warnings like `Unable to parse ... inventory as an inventory source` and `Could not match supplied host pattern, ignoring: vm`. 3. Edit values in `inventory/group_vars/arch.yml` 4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+
 ```
 luks_pass: ""
 user_pass: ""
 ```
 
-## Usage ##
+## Usage
 
 After booting from the Arch installation media, you will need to set the root password to `root` using the `passwd` command.
 <br /><br />
 Then connect to wlan:
+
 1. `iwctl`
 2. `device list`
 3. `station wlan0 scan`
@@ -35,13 +38,14 @@ Optional delete disk:
 dd if=/dev/urandom of=/dev/sdX bs=4096 iflag=fullblock status=progress
 ```
 
-Now you are able to login remotely as root, so you can populate `hosts.yml` and run `playbook.yml`:
+Now you are able to login remotely as root, so you can populate `inventory/hosts` (see Setup step 2) and run `playbook.yml`:
 
 ```bash
 ansible-playbook playbook.yml --ask-vault-password -t bootstrap
 ```
 
 After boot into installed system, connect to wifi:
+
 1. `nmcli dev status`
 2. `nmcli dev wifi list`
 3. `sudo nmcli dev wifi connect <SSID> --ask`
