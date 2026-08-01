@@ -4,5 +4,8 @@
     packages: "{{ packages_list }}"
     task_name: bluetooth
 - name: Enable bluetooth service
-  shell: systemctl enable --now bluetooth
+  systemd:
+    name: bluetooth
+    enabled: true
+    state: started
   become: true

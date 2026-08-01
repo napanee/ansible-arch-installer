@@ -5,7 +5,6 @@
     password: "!"
     system: yes
   notify: Delete passwordless sudo user
-  changed_when: yes
 
 - name: Add passwordless sudo user to sudoers
   lineinfile:
@@ -13,4 +12,4 @@
     state: present
     regexp: "^{{ passwordless_sudo_user_name | regex_escape }} "
     line: "{{ passwordless_sudo_user_name }} ALL=(ALL) NOPASSWD: ALL"
-    validate: '/usr/sbin/visudo -cf %s'
+    validate: "/usr/sbin/visudo -cf %s"

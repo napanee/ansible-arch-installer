@@ -4,5 +4,8 @@
     packages: "{{ packages_list }}"
     task_name: docker
 - name: Enable docker service
-  shell: systemctl enable --now docker
+  systemd:
+    name: docker
+    enabled: true
+    state: started
   become: true
