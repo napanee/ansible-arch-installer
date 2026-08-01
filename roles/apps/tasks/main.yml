@@ -3,6 +3,8 @@
 - include_role:
     name: "apps/audio"
 - include_role:
+    name: "apps/thunar"
+- include_role:
     name: "apps/bluetooth"
 - include_role:
     name: "apps/docker"
