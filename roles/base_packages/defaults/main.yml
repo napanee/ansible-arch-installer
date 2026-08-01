@@ -3,6 +3,8 @@ base_packages:
   - base-devel
   - linux
   - linux-firmware
+  - intel-ucode
+  - amd-ucode
   - lvm2
   - networkmanager
   - python

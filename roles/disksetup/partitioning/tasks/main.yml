@@ -22,7 +22,7 @@
     - partition
 - name: Create and open LUKS volume
   luks_device:
-    cipher: "aes-xts-plain"
+    cipher: "aes-xts-plain64"
     device: "{{ cryptdevice }}"
     name: "{{ luksdevice_name }}"
     passphrase: "{{ luks_pass }}"
@@ -44,8 +44,8 @@
         size: "{{ item.size }}"
         shrink: false
       loop:
-        - {lv: "{{ logicalvolumename_swap }}", size: 16G}
-        - {lv: "{{ logicalvolumename_root }}", size: "100%FREE"}
+        - { lv: "{{ logicalvolumename_swap }}", size: 16G }
+        - { lv: "{{ logicalvolumename_root }}", size: "100%FREE" }
   tags:
     - lvm
 - name: Create filesystems
@@ -83,9 +83,9 @@
         src: "{{ bootdevice }}"
         fstype: vfat
         state: mounted
-    - name: Check, if swap partiton is already mounted
+    - name: Check, if swap partition is already mounted
       command: swapon --show
-      changed_when: true
+      changed_when: false
       register: swap_check
     - name: Mount swap partition
       command: "swapon /dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_swap }}"

@@ -1,21 +1,29 @@
 - name: Generate fstab
   shell: genfstab -U {{ mount_path }} > "{{ mount_path }}/etc/fstab"
+  changed_when: true
 
-- name: Make sure custom hooks are in config
+- name: Replace udev with systemd hook for sd-encrypt compatibility
   lineinfile:
     path: "{{ mount_path }}/etc/mkinitcpio.conf"
-    regexp: "^(HOOKS=.*){{ hooks | join(' ') }} (filesystems.*)$"
+    backrefs: yes
+    regexp: '^(HOOKS=.*)\budev\b(.*)'
+    line: '\1systemd\2'
+
+- name: Check if custom hooks are already present
+  lineinfile:
+    path: "{{ mount_path }}/etc/mkinitcpio.conf"
+    regexp: '^HOOKS=\((?=.*{{ hooks | join(")(?=.*") }}).*\)'
     state: absent
   check_mode: true
-  register: hooks_in_line
+  register: hooks_already_present
 
 - name: Add additional hooks to mkinitcpio config
   lineinfile:
     path: "{{ mount_path }}/etc/mkinitcpio.conf"
     backrefs: yes
-    regexp: ^(HOOKS=.*) (filesystems) (.*)$
-    line: \1 {{ hooks | join(' ') }} \2 \3
-  when: hooks_in_line.changed|bool == false
+    regexp: '^HOOKS=\((.*)\bfilesystems\b(.*)\)'
+    line: 'HOOKS=(\1{{ hooks | join(" ") }} filesystems\2)'
+  when: not (hooks_already_present.found | default(false))
 
 - name: Set language
   template:
