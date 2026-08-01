@@ -1,6 +1,8 @@
 - include_role:
     name: "apps/base"
 - include_role:
+    name: "apps/audio"
+- include_role:
     name: "apps/bluetooth"
 - include_role:
     name: "apps/docker"
