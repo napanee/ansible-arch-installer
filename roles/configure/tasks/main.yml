@@ -3,6 +3,17 @@
   loop:
     - NetworkManager
     - sshd
+    - systemd-resolved
+
+- name: Create resolved drop-in directory
+  file:
+    path: "{{ mount_path }}/etc/systemd/resolved.conf.d/"
+    state: directory
+
+- name: Copy split-DNS config
+  copy:
+    src: resolved.conf.d/split-dns.conf
+    dest: "{{ mount_path }}/etc/systemd/resolved.conf.d/"
 
 - name: Create root's .ssh
   file:
