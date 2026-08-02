@@ -1,7 +1,7 @@
 ---
 - name: Install arch
   hosts:
-    - vm
+    - remote_system
   tags:
     - bootstrap
   pre_tasks:
@@ -20,7 +20,7 @@
 
 - name: Dotfiles install
   hosts:
-    - vm
+    - remote_system
   tags:
     - mainsetup
   pre_tasks:

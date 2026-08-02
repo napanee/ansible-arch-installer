@@ -1,2 +1,2 @@
 inventory/hosts
-inventory/host_vars/vm.yml
+inventory/host_vars/remote_system.yml

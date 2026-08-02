@@ -9,13 +9,13 @@ An ansible playbook to help install Arch Linux.
 
 ```
 [arch]
-vm ansible_host=[IP]
+remote_system ansible_host=[IP]
 ```
 
 Replace `[IP]` with the IP address of the target machine.
 
 3. Edit values in `inventory/group_vars/arch.yml`
-4. Create host vars: `ansible-vault create inventory/host_vars/vm.yml` with
+4. Create host vars: `ansible-vault create inventory/host_vars/remote_system.yml` with
 
 ```
 luks_pass: ""
