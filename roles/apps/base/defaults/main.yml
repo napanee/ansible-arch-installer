@@ -50,5 +50,7 @@ packages_list:
   # - thunderbird                   # Mail Client
   # - vscodium                      # Visual Studio Code without telemetry
   # - visual-studio-code-bin        # Code Editor
+  - breeze-icons                  # Fallback icons required by Papirus
+  - papirus-icon-theme            # Modern SVG icon theme
   - wget
   - wireguard-tools               # VPN tool

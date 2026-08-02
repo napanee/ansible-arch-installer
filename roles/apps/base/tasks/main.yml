@@ -3,3 +3,7 @@
   vars:
     packages: "{{ packages_list }}"
     task_name: base packages
+- name: Set Papirus as default icon theme
+  command: gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+  become: true
+  become_user: "{{ username }}"
