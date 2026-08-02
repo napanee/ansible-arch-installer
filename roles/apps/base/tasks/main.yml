@@ -3,6 +3,14 @@
   vars:
     packages: "{{ packages_list }}"
     task_name: base packages
+
+- name: Initialize nvm directory
+  command: zsh -c 'source /usr/share/nvm/init-nvm.sh'
+  args:
+    creates: "/home/{{ username }}/.nvm"
+  become: true
+  become_user: "{{ username }}"
+
 - name: Ensure GTK 3 config directory exists
   file:
     path: "/home/{{ username }}/.config/gtk-3.0"
