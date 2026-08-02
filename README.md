@@ -5,14 +5,7 @@ An ansible playbook to help install Arch Linux.
 ## Setup
 
 1. Pull this repo
-2. Create the `inventory/hosts`-File with the HOST-IP (this file is required and gitignored, so it does not exist after cloning):
-
-```
-[arch]
-remote_system ansible_host=[IP]
-```
-
-Replace `[IP]` with the IP address of the target machine.
+2. Update `inventory/hosts.yaml` with the IP address of the target machine.
 
 3. Edit values in `inventory/group_vars/arch.yml`
 4. Create host vars: `ansible-vault create inventory/host_vars/remote_system.yml` with
@@ -41,17 +34,19 @@ Optional delete disk:
 dd if=/dev/urandom of=/dev/sdX bs=4096 iflag=fullblock status=progress
 ```
 
-Now you are able to login remotely as root, so you can populate `inventory/hosts` (see Setup step 2) and run `playbook.yml`:
+Now you are able to login remotely as root. Run the bootstrap from your local machine:
 
 ```bash
 ansible-playbook playbook.yml --ask-vault-password -t bootstrap
 ```
 
-After boot into installed system, connect to wifi:
+After boot into installed system, connect to wifi again:
 
-1. `nmcli dev status`
-2. `nmcli dev wifi list`
-3. `sudo nmcli dev wifi connect <SSID> --ask`
+```bash
+nmcli dev status
+nmcli dev wifi list
+sudo nmcli dev wifi connect <SSID> --ask
+```
 
 and run:
 

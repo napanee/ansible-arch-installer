@@ -1,0 +1,6 @@
+all:
+  children:
+    arch:
+      hosts:
+        remote_system:
+          ansible_host: 192.168.x.x
