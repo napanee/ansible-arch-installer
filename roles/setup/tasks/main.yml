@@ -6,7 +6,19 @@
   pacman:
     name: git
     state: present
-- name: Copy backlight-udev rule
+- name: Copy backlight udev rule
   copy:
-    src: backlight.rules
-    dest: /etc/udev/rules.d/
+    src: 90-backlight.rules
+    dest: /etc/udev/rules.d/90-backlight.rules
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload udev rules
+- name: Install monitor hotplug udev rule
+  template:
+    src: 95-monitor-hotplug.rules.j2
+    dest: /etc/udev/rules.d/95-monitor-hotplug.rules
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload udev rules
