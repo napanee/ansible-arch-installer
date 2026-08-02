@@ -4,5 +4,7 @@
     packages: "{{ packages_list }}"
     task_name: betterlockscreen
 - name: Enable betterlockscreen service for suspend/sleep
-  shell: systemctl enable betterlockscreen@{{ username }}
+  systemd:
+    name: "betterlockscreen@{{ username }}"
+    enabled: true
   become: true

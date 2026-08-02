@@ -3,7 +3,22 @@
   vars:
     packages: "{{ packages_list }}"
     task_name: base packages
-- name: Set Papirus as default icon theme
-  command: gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+- name: Ensure GTK 3 config directory exists
+  file:
+    path: "/home/{{ username }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
   become: true
-  become_user: "{{ username }}"
+
+- name: Set Papirus as default icon theme
+  ini_file:
+    path: "/home/{{ username }}/.config/gtk-3.0/settings.ini"
+    section: Settings
+    option: gtk-icon-theme-name
+    value: Papirus
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0644"
+  become: true

@@ -6,6 +6,5 @@ packages_list:
   - poppler
   - fd
   - ripgrep
-  - fzf
   - zoxide
   - imagemagick

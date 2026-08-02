@@ -6,4 +6,6 @@
       --answerclean none --answeredit none --answerupgrade none --answerdiff none
       --removemake --noconfirm --combinedupgrade --needed {{ item | quote }}
   loop: "{{ packages_list }}"
+  register: yay_result
+  changed_when: "'there is nothing to do' not in yay_result.stdout"
 

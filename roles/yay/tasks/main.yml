@@ -21,7 +21,9 @@
       when: which_command.rc != 0
 
     - name: Build and install yay
-      shell: "cd {{ temp_dir | quote }} && makepkg -rsi --noconfirm"
+      command: makepkg -rsi --noconfirm
+      args:
+        chdir: "{{ temp_dir }}"
       when: which_command.rc != 0
   always:
     - name: Remove temporary directory

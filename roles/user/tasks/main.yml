@@ -15,5 +15,6 @@
     command: arch-chroot {{ mount_path | quote }} useradd -m -g users -G wheel,video -s /bin/bash "{{ username }}"
   - name: Set the user account password
     command: arch-chroot {{ mount_path | quote }} usermod --password "{{ user_pass | password_hash('sha512') }}" "{{ username }}"
+    no_log: true
   tags: add_user
   when: user_exists.stdout_lines | length == 0
