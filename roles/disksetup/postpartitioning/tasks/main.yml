@@ -2,6 +2,13 @@
   shell: genfstab -U {{ mount_path }} > "{{ mount_path }}/etc/fstab"
   changed_when: true
 
+- name: Set mkinitcpio MODULES
+  lineinfile:
+    path: "{{ mount_path }}/etc/mkinitcpio.conf"
+    regexp: '^MODULES=\(.*\)'
+    line: 'MODULES=({{ mkinitcpio_modules | join(" ") }})'
+  when: mkinitcpio_modules | length > 0
+
 - name: Replace udev with systemd hook for sd-encrypt compatibility
   lineinfile:
     path: "{{ mount_path }}/etc/mkinitcpio.conf"
