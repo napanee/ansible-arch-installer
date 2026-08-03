@@ -63,6 +63,7 @@ packages_list:
   # Networking & security
   - gnome-keyring
   - libsecret                     # Secret Service client library
+  - openconnect                   # VPN client for Cisco AnyConnect and others
   - openssh                       # SSH protocol implementation
   - smbclient                     # Access SMB/CIFS shares
   - wireguard-tools               # VPN tool
