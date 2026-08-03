@@ -2,4 +2,4 @@
     name: installer
   vars:
     packages: "{{ packages_list }}"
-    task_name: betterlockscreen
+    task_name: xsecurelock

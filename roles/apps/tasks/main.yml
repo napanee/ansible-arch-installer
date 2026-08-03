@@ -17,4 +17,4 @@
 - import_role:
     name: "apps/yazi"
 - import_role:
-    name: "apps/betterlockscreen"
+    name: "apps/xsecurelock"
