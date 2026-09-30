@@ -1,0 +1,10 @@
+- import_role:
+    name: "mainsetup/system/hostname"
+- import_role:
+    name: "mainsetup/system/locales"
+- import_role:
+    name: "mainsetup/system/hardware"
+- import_role:
+    name: "mainsetup/system/zram"
+- import_role:
+    name: "mainsetup/system/network"

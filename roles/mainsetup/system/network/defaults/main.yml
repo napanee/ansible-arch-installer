@@ -1,0 +1,6 @@
+packages_list:
+  - net-tools           # Classic network tools (ifconfig, route)
+  - bind                # DNS utilities (dig, nslookup)
+  - iperf3              # Network bandwidth measurement
+  - traceroute          # Network route tracing
+  - tcpdump             # Network packet analysis

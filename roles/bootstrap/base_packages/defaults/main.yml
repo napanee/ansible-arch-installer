@@ -1,0 +1,11 @@
+base_packages:
+  - base
+  - base-devel
+  - linux
+  - linux-firmware
+  - intel-ucode
+  - lvm2
+  - networkmanager
+  - python
+  - openssh
+  - systemd-resolvconf # systemd-resolved compatibility for resolvconf

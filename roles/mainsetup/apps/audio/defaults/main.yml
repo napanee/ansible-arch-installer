@@ -1,0 +1,6 @@
+packages_list:
+  - pipewire # Core
+  - pipewire-alsa # ALSA compatibility
+  - pipewire-pulse # PulseAudio replacement (drop-in)
+  - wireplumber # Session manager - required
+  - pavucontrol # GUI volume mixer

@@ -1,0 +1,20 @@
+- import_role:
+    name: "mainsetup/apps/base"
+- import_role:
+    name: "mainsetup/apps/audio"
+- import_role:
+    name: "mainsetup/apps/thunar"
+- import_role:
+    name: "mainsetup/apps/bluetooth"
+- import_role:
+    name: "mainsetup/apps/docker"
+- import_role:
+    name: "mainsetup/apps/qtile"
+- import_role:
+    name: "mainsetup/apps/vim"
+- import_role:
+    name: "mainsetup/apps/zsh"
+- import_role:
+    name: "mainsetup/apps/yazi"
+- import_role:
+    name: "mainsetup/apps/xsecurelock"

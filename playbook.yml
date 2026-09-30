@@ -6,11 +6,11 @@
     - bootstrap
   pre_tasks:
     - import_role:
-        name: check
+        name: bootstrap/check
   roles:
-    - disksetup
-    - configure
-    - user
+    - bootstrap/disksetup
+    - bootstrap/configure
+    - bootstrap/user
   post_tasks:
     - name: Reboot into the system
       tags: reboot
@@ -18,20 +18,19 @@
         reboot_timeout: 120
         connect_timeout: 10
 
-- name: Dotfiles install
+- name: Main setup
   hosts:
     - remote_system
   tags:
     - mainsetup
   pre_tasks:
     - import_role:
-        name: setup
+        name: mainsetup/setup
   roles:
-    - hostname
-    - locales
-    - dotfiles
-    - apps
-    - x11
+    - mainsetup/system
+    - mainsetup/dotfiles
+    - mainsetup/apps
+    - mainsetup/x11
   post_tasks:
     - name: Reboot into the system
       tags: reboot

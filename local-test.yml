@@ -5,4 +5,4 @@
   tags:
     - bootstrap
   roles:
-    - "apps/codium"
+    - "mainsetup/apps/codium"

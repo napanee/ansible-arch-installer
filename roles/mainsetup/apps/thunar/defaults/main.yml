@@ -1,0 +1,6 @@
+packages_list:
+  - thunar               # GTK file manager
+  - thunar-volman        # Automatic management of removable media
+  - tumbler              # Thumbnail service for the file manager
+  - ffmpegthumbnailer    # Video thumbnails
+  - gvfs-smb             # Windows/Samba file sharing (SMB/CIFS)

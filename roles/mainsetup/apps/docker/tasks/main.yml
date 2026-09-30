@@ -1,0 +1,24 @@
+- import_role:
+    name: mainsetup/installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: docker
+- name: Enable docker service
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+  become: true
+
+- name: Ensure docker group exists
+  group:
+    name: docker
+    state: present
+  become: true
+
+- name: Add user to docker group
+  user:
+    name: "{{ username }}"
+    groups: docker
+    append: true
+  become: true

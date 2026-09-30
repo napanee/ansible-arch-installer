@@ -1,0 +1,32 @@
+- import_role:
+    name: mainsetup/installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: base packages
+
+- name: Initialize nvm directory
+  command: zsh -c 'source /usr/share/nvm/init-nvm.sh'
+  args:
+    creates: "/home/{{ username }}/.nvm"
+  become: true
+  become_user: "{{ username }}"
+
+- name: Ensure GTK 3 config directory exists
+  file:
+    path: "/home/{{ username }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+  become: true
+
+- name: Set Papirus as default icon theme
+  ini_file:
+    path: "/home/{{ username }}/.config/gtk-3.0/settings.ini"
+    section: Settings
+    option: gtk-icon-theme-name
+    value: Papirus
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0644"
+  become: true

@@ -1,0 +1,5 @@
+packages_list:
+  - intel-media-driver  # Intel VA-API driver (hardware video decoding)
+  - vulkan-intel        # Intel Vulkan driver
+  - xf86-video-vesa    # Generic VESA fallback graphics driver
+  - usbutils           # USB diagnostics (lsusb)

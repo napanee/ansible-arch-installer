@@ -1,4 +1,0 @@
-title		Arch Linux
-linux		/vmlinuz-linux
-initrd		/initramfs-linux.img
-options		rd.luks.name={{ luks_device_uuid.stdout }}={{ volumegroupname }} root=/dev/mapper/{{ volumegroupname }}-{{ logicalvolumename_root }} rw{{ ' ' + kernel_parameters if kernel_parameters else '' }}

@@ -1,0 +1,11 @@
+- include_role:
+    name: "bootstrap/disksetup/partitioning"
+    public: yes
+- import_role:
+    name: bootstrap/base_packages
+- include_role:
+    name: "bootstrap/disksetup/postpartitioning"
+    public: yes
+- include_role:
+    name: "bootstrap/disksetup/bootloader"
+    public: yes

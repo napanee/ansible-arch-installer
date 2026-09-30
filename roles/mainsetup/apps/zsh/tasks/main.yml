@@ -1,0 +1,10 @@
+- import_role:
+    name: mainsetup/installer
+  vars:
+    packages: "{{ packages_list }}"
+    task_name: zsh
+- name: Set zsh as default shell
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+  become: true

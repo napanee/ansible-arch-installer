@@ -1,0 +1,2 @@
+packages_list:
+  - zram-generator      # Swap-on-ZRAM configuration
