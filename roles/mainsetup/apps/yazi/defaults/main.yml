@@ -1,7 +1,7 @@
 packages_list:
   - yazi
   - ffmpeg
-  - p7zip
+  - 7zip
   - jq
   - poppler
   - fd

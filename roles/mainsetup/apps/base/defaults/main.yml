@@ -32,16 +32,8 @@ packages_list:
   - desktop-file-utils            # Desktop entry database
 
   # Applications
-  # - betterbird-bin                # Mail Client
-  # - enpass-bin                    # Password Manager
   - firefox                       # Browser
-  # - google-chrome                 # Browser
-  # - joplin-desktop                # Notes Application
   - mpv                           # Media Player
-  # - nextcloud-client              # Nextcloud desktop client
-  # - signal-desktop                # Private messaging from your desktop
-  - simplescreenrecorder          # Screen recorder with X11 and OpenGL support
-  # - visual-studio-code-bin        # Code Editor
   - wezterm                       # Terminal emulator
 
   # CLI tools

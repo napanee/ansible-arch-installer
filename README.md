@@ -58,6 +58,26 @@ ansible-playbook playbook.yml --ask-vault-password -t mainsetup
 
 Full target package list for a new laptop. Packages are categorized by installation method.
 
+### Optional AUR packages
+
+The playbook installs packages with `pacman` only, so AUR packages are **not**
+installed automatically. Install this apps manually with an AUR helper
+(`yay`, `paru`, …) if you want them:
+
+| Package                | Description                  | Role      |
+| ---------------------- | ---------------------------- | --------- |
+| betterbird-bin         | Thunderbird fork (email)     | apps/base |
+| enpass-bin             | Password manager             | apps/base |
+| google-chrome          | Web browser (Chromium-based) | apps/base |
+| joplin-desktop         | Markdown notes app           | apps/base |
+| nextcloud-client       | Nextcloud sync client        | apps/base |
+| signal-desktop         | Signal messenger             | apps/base |
+| simplescreenrecorder   | Screen recorder              | apps/base |
+| visual-studio-code-bin | VS Code editor               | apps/base |
+
+> To list the AUR (foreign) packages already installed on a system, run
+> `pacman -Qm` (or `pacman -Qmq` for names only).
+
 ### Already integrated in Ansible
 
 These packages are already managed by existing roles in this project:
@@ -93,9 +113,7 @@ These packages are already managed by existing roles in this project:
 | rofi-emoji                  | Emoji picker for Rofi                |
 | picom                       | X compositor (transparency, shadows) |
 | numlockx                    | Enable NumLock on startup            |
-| xidlehook                   | Idle detection (Rust-based)          |
 | xorg-xmodmap                | Keyboard remapping                   |
-| xorg-server-xephyr          | Nested X server (testing)            |
 | arandr                      | Visual front end for XRandR          |
 | brightnessctl               | Backlight/LED brightness control     |
 | gvfs                        | Virtual filesystem (mounts, trash)   |
@@ -106,19 +124,13 @@ These packages are already managed by existing roles in this project:
 | xdg-utils                   | xdg-open / xdg-mime                  |
 | shared-mime-info            | MIME type database                   |
 | desktop-file-utils          | Desktop entry database               |
-| betterbird-bin              | Thunderbird fork (email)             |
-| enpass-bin                  | Password manager                     |
 | firefox                     | Web browser                          |
-| google-chrome               | Web browser (Chromium-based)         |
-| joplin-desktop              | Markdown notes app                   |
 | mpv                         | Video player                         |
-| nextcloud-client            | Nextcloud sync client                |
-| signal-desktop              | Signal messenger                     |
-| simplescreenrecorder        | Screen recorder                      |
-| visual-studio-code-bin      | VS Code editor                       |
 | wezterm                     | GPU-accelerated terminal emulator    |
 | btop                        | System resource monitor              |
+| feh                         | Image viewer / wallpaper setter      |
 | fzf                         | Fuzzy finder                         |
+| mkcert                      | Local TLS certificates               |
 | ncdu                        | Disk usage analyzer                  |
 | nvm                         | Node version manager                 |
 | pass                        | CLI password store (GPG)             |
@@ -130,7 +142,6 @@ These packages are already managed by existing roles in this project:
 | gnome-keyring               | GNOME keyring                        |
 | libsecret                   | Secret Service client library        |
 | openconnect                 | Cisco/Juniper VPN client             |
-| openssh                     | SSH (also in bootstrap)              |
 | smbclient                   | SMB/CIFS client                      |
 | wireguard-tools             | WireGuard VPN                        |
 | postgresql-libs             | PostgreSQL client libraries          |
@@ -182,17 +193,15 @@ These packages are already managed by existing roles in this project:
 
 #### Apps – vim role (`apps/vim`)
 
-| Package  | Description        |
-| -------- | ------------------ |
-| vim      | Text editor        |
-| vim-plug | Vim plugin manager |
+| Package | Description |
+| ------- | ----------- |
+| vim     | Text editor |
 
 #### Apps – zsh role (`apps/zsh`)
 
-| Package                     | Description             |
-| --------------------------- | ----------------------- |
-| zsh                         | Z-Shell                 |
-| zsh-theme-powerlevel10k-git | Powerlevel10k ZSH theme |
+| Package | Description |
+| ------- | ----------- |
+| zsh     | Z-Shell     |
 
 #### Apps – yazi role (`apps/yazi`)
 
@@ -200,7 +209,7 @@ These packages are already managed by existing roles in this project:
 | ----------- | -------------------------- |
 | yazi        | Terminal file manager      |
 | ffmpeg      | Multimedia framework       |
-| p7zip       | 7z archive tool            |
+| 7zip        | 7z archive tool            |
 | jq          | JSON processor             |
 | poppler     | PDF rendering library      |
 | fd          | Fast find alternative      |
@@ -221,11 +230,9 @@ These packages are already managed by existing roles in this project:
 | ------- | --------------- |
 | git     | Version control |
 
-#### Built from source (yay role)
-
-| Package | Description                    |
-| ------- | ------------------------------ |
-| yay     | AUR helper (built via makepkg) |
+> **Package installer:** All packages are installed with `pacman` (official repos
+> only). AUR packages are not installed automatically — see
+> [Optional AUR packages](#optional-aur-packages) below.
 
 ---
 
@@ -378,7 +385,7 @@ These packages are missing from the current roles and should be added:
 
 1. **Arch bootstrap** (`pacstrap`): `base`, `linux`, `linux-firmware`, `intel-ucode`, `base-devel`
 2. **Ansible bootstrap tag**: Basic config (locale, timezone, user, bootloader, network)
-3. **Build yay** (Ansible shell task, already implemented)
-4. **Enable multilib** (if Steam is needed): Edit `/etc/pacman.conf`
-5. **Ansible main setup tag**: All pacman + AUR packages
+3. **Enable multilib** (if Steam is needed): Edit `/etc/pacman.conf`
+4. **Ansible main setup tag**: All pacman packages (official repos only)
+5. **Optional AUR packages**: Install manually with an AUR helper (see below)
 6. **Manual post-install**: Brother printer/scanner config, verify Steam/gaming
