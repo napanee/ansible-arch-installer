@@ -15,10 +15,7 @@ packages_list:
   - rofi                          # Application launcher
   - rofi-calc
   - rofi-emoji
-  - picom                         # X compositor that may fix tearing issues
-  - numlockx                      # Turns on the numlock key in X11
-  - xorg-xmodmap                  # Utility for modifying keymaps and button mappings
-  - arandr                        # Visual front end for XRandR 1.2
+  - kanshi                        # Dynamic display configuration daemon for Wayland
   - brightnessctl                 # Backlight and LED brightness control
 
   # File management & portals
@@ -34,6 +31,7 @@ packages_list:
   # Applications
   - firefox                       # Browser
   - mpv                           # Media Player
+  - wf-recorder                   # Wayland screen recorder
   - wezterm                       # Terminal emulator
 
   # CLI tools
@@ -48,9 +46,9 @@ packages_list:
   - wget                          # File downloader
 
   # Screenshots & clipboard
-  - maim                          # Command-line screenshot utility
-  - slop                          # Region/area selection (used by maim)
-  - xclip                         # Clipboard access from the command line
+  - grim                          # Wayland screenshot utility
+  - slurp                         # Wayland region/area selection (used by grim)
+  - wl-clipboard                  # Wayland clipboard access (wl-copy / wl-paste)
 
   # Networking & security
   - gnome-keyring

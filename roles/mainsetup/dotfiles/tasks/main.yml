@@ -4,6 +4,7 @@
       git:
         repo: https://github.com/napanee/dotfiles.git
         dest: ~/.dotfiles
+        version: wayland-hyprland
         recursive: true
     - name: Install dotfiles
       shell: |

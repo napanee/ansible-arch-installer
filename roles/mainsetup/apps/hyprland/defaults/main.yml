@@ -1,0 +1,5 @@
+packages_list:
+  - hyprland                      # Wayland compositor / window manager
+  - xdg-desktop-portal-hyprland   # screen sharing / portal backend for Hyprland
+  - qt5-wayland                   # Qt apps under Wayland
+  - qt6-wayland

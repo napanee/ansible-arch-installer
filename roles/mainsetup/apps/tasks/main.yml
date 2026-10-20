@@ -9,7 +9,7 @@
 - import_role:
     name: "mainsetup/apps/docker"
 - import_role:
-    name: "mainsetup/apps/qtile"
+    name: "mainsetup/apps/hyprland"
 - import_role:
     name: "mainsetup/apps/vim"
 - import_role:
@@ -17,4 +17,4 @@
 - import_role:
     name: "mainsetup/apps/yazi"
 - import_role:
-    name: "mainsetup/apps/xsecurelock"
+    name: "mainsetup/apps/hyprlock"

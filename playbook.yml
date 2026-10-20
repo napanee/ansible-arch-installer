@@ -30,7 +30,6 @@
     - mainsetup/system
     - mainsetup/dotfiles
     - mainsetup/apps
-    - mainsetup/x11
   post_tasks:
     - name: Reboot into the system
       tags: reboot

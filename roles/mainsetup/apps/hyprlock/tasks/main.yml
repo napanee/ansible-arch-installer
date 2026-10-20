@@ -2,4 +2,4 @@
     name: mainsetup/installer
   vars:
     packages: "{{ packages_list }}"
-    task_name: qtile
+    task_name: hyprlock
